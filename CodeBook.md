@@ -3,7 +3,7 @@ The Code Book describes the variables, the data, and transformations that have b
 
 ## Modifications
 
-The original data sets was modified by:
+The original data set was modified by:
 
 1. Merging the training and the test sets to create one data set 
 2. Extracting only the measurements on the mean and standard deviation for each measurement
