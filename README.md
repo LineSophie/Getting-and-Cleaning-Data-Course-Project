@@ -2,7 +2,7 @@
 
 This is the Assignment for the "Getting and Cleaning Data" Coursera course. My R script, called run_analysis.R, executes the following:
 
-1. Downloads and unzips the source data and creates new directors if the named one doesn't exist
+1. Downloads and unzips the source data and creates a new directory if the named one doesn't exist
 2. Reads all the neccessary data sets (Test, Training, Activity Labels, etc.)
 3. Labels the approproiate columns for the Datasets (e.g. SubjectId to indicate the subjects)
 4. Merges the Test and the Training sets to create one data set
