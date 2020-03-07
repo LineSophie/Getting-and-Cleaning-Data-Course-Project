@@ -5,7 +5,7 @@ The Code Book describes the variables, the data, and transformations that have b
 
 
 # Activity Labels 
-^ WALKING (1): subject was walking during the test
+** WALKING (1): subject was walking during the test
 WALKING_UPSTAIRS (2): subject was walking up a staircase during the test
 WALKING_DOWNSTAIRS (3): subject was walking down a staircase during the test
 SITTING (4): subject was sitting during the test
