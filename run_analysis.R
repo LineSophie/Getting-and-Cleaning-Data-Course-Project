@@ -70,7 +70,7 @@ names(WithActivityNames)<-gsub("gravity", "Gravity", names(WithActivityNames) )
 
 
 ##Step 5: Creating a second, independent tidy data set with the average of each variable for each activity and each subject
-##Step 5.1: 
+##Step 5.1: Creating a second Dataset (as described above)
 
 TidyData1 <- select(WithActivityNames, -c(ActivityType))
 
