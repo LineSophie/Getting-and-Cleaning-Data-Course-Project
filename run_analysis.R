@@ -15,13 +15,13 @@ activity_test <- read.table("./data/UCI HAR Dataset/test/X_test.txt")
 features_test <- read.table("./data/UCI HAR Dataset/test/y_test.txt")
 subject_test <- read.table("./data/UCI HAR Dataset/test/subject_test.txt")
 
-## Step 1.3 Reading Features Vector
+## Step 1.3: Reading Features Vector
 Features <- read.table("./data/UCI HAR Dataset/features.txt")
 
-## Step 1.4 Reading Activity Labels
+## Step 1.4: Reading Activity Labels
 ActivityLabels <- read.table("./data/UCI HAR Dataset/activity_labels.txt", as.is= FALSE)
 
-## Naming Columns
+## Step 1.5: Naming Columns
 colnames(activity_train) <- Features[,2]
 colnames(features_train) <- "ActivityId"
 colnames(subject_train) <- "SubjectId"
@@ -41,14 +41,13 @@ MergeTrainTest <- rbind(Merge_Test, Merge_Train)
 ## Step 2.1: reading Column names
 ColNames <- colnames(MergeTrainTest)
 
-## Step 2.1:  Create Vector for identifying ID, mean and std
+## Step 2.2:  Create Vector for identifying ID, Mean and Std
 ColumnsWithMeanStd <- grepl("mean|std|ActivityId|SubjectId", ColNames) 
 
-## Step 2.2: Create Subset 
+## Step 2.3: Create Subset 
 New_mean_std <- MergeTrainTest[ ,ColumnsWithMeanStd ==TRUE]
                          
 ## Step 3: Adding Descriptive Activity Names
-
 WithActivityNames <- merge(New_mean_std, ActivityLabels,
                               by= 'ActivityId',
                               all.x=TRUE)
@@ -70,14 +69,17 @@ names(WithActivityNames)<-gsub("angle", "Angle", names(WithActivityNames) )
 names(WithActivityNames)<-gsub("gravity", "Gravity", names(WithActivityNames) )
 
 
-##Step 5: Second, independent tidy data set with the average of each variable for each activity and each subject
+##Step 5: Creating a second, independent tidy data set with the average of each variable for each activity and each subject
 ##Step 5.1: 
-TidyData2<- WithActivityNames %>%
-  group_by(SubjectId, ActivityId) %>%
-  summarise_all()
 
+TidyData1 <- select(WithActivityNames, -c(ActivityType))
 
+TidyData2<- TidyData1 %>%
+  group_by(ActivityId, SubjectId) %>%
+  summarise_all(funs(mean))
 
-##Step 5.2: Write data as Textfile 
+TidyData2$ActivityId <- factor(TidyData2$ActivityId,labels = ActivityLabels$ActivityType)
+
+##Step 5.2: Writing the data as Textfile 
 write.table(TidyData2, "TidyData2.txt", row.name=FALSE)
 
